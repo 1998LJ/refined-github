@@ -42,6 +42,15 @@
 	translate: -28px -56px;
 }
 
+/* Project side panels can contain the reaction overlay and match the rule above too. */
+/* Undo the popup positioning on that outer overlay. */
+:root div[data-visibility-visible]:has(
+	div[data-visibility-visible] [class*='ReactionsMenuItem-module']
+) {
+	min-width: initial !important;
+	translate: none;
+}
+
 /*
 
 Test URLs:

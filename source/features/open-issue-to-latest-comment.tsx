@@ -1,10 +1,9 @@
-import React from 'dom-chef';
 import * as pageDetect from 'github-url-detection';
 import {$, closestElement} from 'select-dom';
 
 import features from '../feature-manager.js';
 import {commentBoxHashIssue, commentBoxHashPr, commentsCountInLists} from '../github-helpers/selectors.js';
-import {wrapAll} from '../helpers/dom-utils.js';
+import linkifyCommentCount from '../helpers/linkify-comment-count.js';
 import observe from '../helpers/selector-observer.js';
 
 function getHash(type: 'issue' | 'pr'): string {
@@ -24,7 +23,7 @@ function linkify(item: HTMLElement): void {
 		const url = new URL(conversationLink.href);
 		const type = pageDetect.isIssue(url) ? 'issue' : 'pr';
 		url.hash = getHash(type);
-		wrapAll(<a href={url.href} className="Link--muted d-flex gap-1" />, ...item.childNodes);
+		linkifyCommentCount(item, url.href);
 	}
 }
 
